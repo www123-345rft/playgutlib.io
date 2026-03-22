@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #fff9f0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .bear-image {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 30px;
+        }
+        
+        .title {
+            font-size: 22px;
+            color: #555;
+            text-align: center;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+        
+        .buttons-container {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+            justify-content: center;
+            height: 60px;
+        }
+        
+        .button {
+            position: relative;
+            flex: 1;
+            min-width: 140px;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .button-pink {
+            background-color: #ff6b81;
+        }
+        
+        .button-blue {
+            background-color: #74b9ff;
+        }
+        
+        @media (max-width: 600px) {
+            .bear-image {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .title {
+                font-size: 20px;
+            }
+            
+            .buttons-container {
+                flex-direction: row;
+                max-width: 90%;
+                gap: 10px;
+            }
+            
+            .button {
+                font-size: 14px;
+                padding: 12px 8px;
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20little%20bear%20with%20big%20eyes%2C%20cartoon%20style%2C%20soft%20and%20cute%2C%20white%20background&image_size=square_hd" alt="可爱小熊" class="bear-image">
+    
+    <h1 class="title">你是想做我的小臭狗还是刘亦菲的小香猪？</h1>
+    
+    <div class="buttons-container">
+        <button class="button button-pink" id="dogButton">我的小臭狗</button>
+        <button class="button button-blue" id="pigButton">刘亦菲的小香猪</button>
+    </div>
+    
+    <script>
+        const dogButton = document.getElementById('dogButton');
+        const pigButton = document.getElementById('pigButton');
+        
+        let dogScale = 1;
+        let pigScale = 1;
+        
+        dogButton.addEventListener('click', function() {
+            alert('🥳 我就知道你最爱我喽！么么😘');
+        });
+        
+        pigButton.addEventListener('click', function() {
+            // 手机端震动反馈
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
+            }
+            
+            // 调整按钮大小
+            dogScale += 0.25;
+            pigScale = Math.max(0.01, pigScale - 0.25);
+            
+            dogButton.style.transform = `scale(${dogScale})`;
+            pigButton.style.transform = `scale(${pigScale})`;
+            
+            // 当狗按钮足够大时，调整z-index使狗按钮覆盖猪按钮
+            if (dogScale > 1.5) {
+                dogButton.style.zIndex = "10";
+                pigButton.style.zIndex = "1";
+            }
+        });
+    </script>
+</body>
+</html>
